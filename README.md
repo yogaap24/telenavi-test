@@ -1,61 +1,87 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Telenavi Task - Todo Management API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem API untuk mengelola tugas (todo) dengan berbagai fitur seperti pengkategorian berdasarkan status, prioritas, dan penanggung jawab (assignee). API ini menyediakan kemampuan dasar CRUD, exportasi data, serta visualisasi dalam bentuk chart.
 
-## About Laravel
+## Fitur
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **CRUD Todo**: Membuat, membaca, memperbarui dan menghapus todo
+- **Data Ekspor**: Ekspor data todo ke format CSV/Excel
+- **Chart Data**: Menyediakan data untuk visualisasi statistik todo
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Endpoints
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Todo Management
 
-## Learning Laravel
+- `GET /api/v1/todos` - Mendapatkan daftar todo dengan filter dan pagination
+- `POST /api/v1/todos` - Membuat todo baru
+- `GET /api/v1/todos/{id}` - Mendapatkan detail todo berdasarkan ID
+- `PUT /api/v1/todos/{id}` - Memperbarui todo yang ada
+- `DELETE /api/v1/todos/{id}` - Menghapus todo
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Data Export
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- `GET /api/v1/todos/export` - Ekspor data todo ke format CSV/Excel
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Chart Data
 
-## Laravel Sponsors
+- `GET /api/v1/todos/chart?type=status` - Mendapatkan ringkasan jumlah todo berdasarkan status
+- `GET /api/v1/todos/chart?type=priority` - Mendapatkan ringkasan jumlah todo berdasarkan prioritas
+- `GET /api/v1/todos/chart?type=assignee` - Mendapatkan ringkasan todo berdasarkan penanggung jawab
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Instalasi
 
-### Premium Partners
+1. Clone repositori:
+   ```bash
+   git clone https://github.com/yogaap24/telenavi-test
+   cd telenavi-test
+   ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. Install dependensi:
+   ```bash
+   composer install
+   ```
 
-## Contributing
+3. Salin file .env:
+   ```bash
+   cp .env.example .env
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. Konfigurasi database di file `.env`
 
-## Code of Conduct
+5. Generate application key:
+   ```bash
+   php artisan key:generate
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. Jalankan migrasi:
+   ```bash
+   php artisan migrate
+   ```
 
-## Security Vulnerabilities
+7. (Opsional) Isi database dengan data contoh:
+   ```bash
+   php artisan db:seed
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Menjalankan Aplikasi
 
-## License
+```bash
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Aplikasi akan berjalan di `http://localhost:8000`
+
+## Teknologi yang Digunakan
+
+- **Framework**: Laravel
+- **Database**: PostgreSQL/MySQL
+- **Paket Tambahan**:
+  - PhpOffice/PhpSpreadsheet (untuk ekspor Excel)
+  - Laravel Sanctum (untuk autentikasi API)
+
+## Kebutuhan Sistem
+
+- PHP >= 8.0
+- Composer
+- Database PostgreSQL/MySQL
+- Ekstensi PHP: BCMath, Ctype, JSON, Mbstring, OpenSSL, PDO, Tokenizer, XML
